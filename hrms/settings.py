@@ -128,4 +128,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ['https://pacific-coast-78888.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = [
+    'https://indval2022.herokuapp.com'
+]
