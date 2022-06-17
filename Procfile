@@ -1,1 +1,1 @@
-web: waitress-serve --listen=localhost:$PORT hrms.wsgi:application
+web: waitress-serve --port=$PORT hrms.wsgi:application
