@@ -1,0 +1,154 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  .body {
+    height: 100vh;
+    width: 100%;
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
+    font-size: 14px;
+    background: #f6fffd;
+    padding: 20px;
+    text-align: center;
+   
+  }
+  
+  .wrapper {
+    width: 200px;
+    height: 300px;
+    margin-top: -350px;
+    margin-left: 900px;
+    text-align: left;
+  }
+  
+  .rec-prism {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateZ(-100px);
+    transition: transform 0.5s ease-in;
+  }
+  
+  .face {
+    position: absolute;
+    width: 300px;
+    height: 500px;
+    padding: 20px;
+    border: 3px solid rgb(20,124,176);
+    border-radius: 10px;
+  }
+  .face .content {
+    color: #666;
+  }
+  .face .content h2 {
+    font-size: 2em;
+    color: rgb(20,124,176);
+  }
+  .face .content .field-wrapper {
+    margin-top: 100px;
+    position: relative;
+  }
+  .face .content .field-wrapper label {
+    position: absolute;
+    pointer-events: none;
+    font-size: 1em;
+    top: 40%;
+    left: 0;
+    transform: translateY(-50%);
+    transition: all ease-in 0.25s;
+    color: #999999;
+    padding-left: 5px;
+  }
+  .face .content .field-wrapper input[type=text], .face .content .field-wrapper input[type=password], .face .content .field-wrapper input[type=submit], .face .content .field-wrapper textarea {
+    -webkit-appearance: none;
+    appearance: none;
+    padding-left: 5px;
+  }
+  .face .content .field-wrapper input[type=text]:focus, .face .content .field-wrapper input[type=password]:focus, .face .content .field-wrapper input[type=submit]:focus, .face .content .field-wrapper textarea:focus {
+    outline: none;
+    padding-left: 5px;
+  }
+  .face .content .field-wrapper input[type=text], .face .content .field-wrapper input[type=password], .face .content .field-wrapper textarea {
+    width: 100%;
+    border: none;
+    background: transparent;
+    line-height: 2em;
+    border-bottom: 1px solid rgb(20,124,176);
+    color: #666;
+    
+  }
+  .face .content .field-wrapper input[type=text]::-webkit-input-placeholder, .face .content .field-wrapper input[type=password]::-webkit-input-placeholder, .face .content .field-wrapper textarea::-webkit-input-placeholder {
+    opacity: 0;
+  
+  }
+  .face .content .field-wrapper input[type=text]::-moz-placeholder, .face .content .field-wrapper input[type=password]::-moz-placeholder, .face .content .field-wrapper textarea::-moz-placeholder {
+    opacity: 0;
+  }
+  .face .content .field-wrapper input[type=text]:-ms-input-placeholder, .face .content .field-wrapper input[type=password]:-ms-input-placeholder, .face .content .field-wrapper textarea:-ms-input-placeholder {
+    opacity: 0;
+  }
+  .face .content .field-wrapper input[type=text]:-moz-placeholder, .face .content .field-wrapper input[type=password]:-moz-placeholder, .face .content .field-wrapper textarea:-moz-placeholder {
+    opacity: 0;
+  }
+  .face .content .field-wrapper input[type=text]:focus + label, .face .content .field-wrapper input[type=text]:not(:placeholder-shown) + label, .face .content .field-wrapper input[type=password]:focus + label, .face .content .field-wrapper input[type=password]:not(:placeholder-shown) + label, .face .content .field-wrapper textarea:focus + label, .face .content .field-wrapper textarea:not(:placeholder-shown) + label {
+    top: -35%;
+    color: rgb(20,124,176);
+  }
+  .face .content .field-wrapper input[type=submit] {
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    width: 70%;
+    background: rgb(20,124,176);
+    line-height: 2em;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+    margin-left: 15%;
+  }
+  .face .content .field-wrapper input[type=submit]:hover {
+    opacity: 0.9;
+  }
+  .face .content .field-wrapper input[type=submit]:active {
+    transform: scale(0.96);
+  }
+  .face .content .field-wrapper textarea {
+    resize: none;
+    line-height: 1em;
+  }
+  .face .content .field-wrapper textarea:focus + label, .face .content .field-wrapper textarea:not(:placeholder-shown) + label {
+    top: -25%;
+  }
+  #frgtbtn{
+    margin-left: 30%;
+  }
+  
+  
+  /* (D) ADDING "SPRING EFFECT" */
+  @keyframes spring { 
+    0% { transform: scale(1) translateY(0); }
+    10% { transform: scale(1.2, 0.6); }
+    30% { transform: scale(0.8, 1.1) translateY(-50px); }
+    50% { transform: scale(1) translateY(0); }
+    100% { transform: translateY(0); }
+  }
+   
+  .bounce-ani{
+    position: relative;
+    width: 900px;
+    margin-top: 100px;
+  }
+  
+  .spring{
+    position: relative;
+    animation: spring 2s;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+    margin-top:100px;
+    height: 200px;
+    width: 200px;
+  }

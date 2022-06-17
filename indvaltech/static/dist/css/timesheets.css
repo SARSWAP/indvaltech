@@ -1,0 +1,147 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto,"Helvetica Neue",Arial,sans-serif;
+  color: #000000;
+}
+
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding: 58px 0 0; /* Height of navbar */
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+  width: 240px;
+  z-index: 600;
+}
+
+@media (max-width: 991.98px) {
+  .sidebar {
+    width: 100%;
+  }
+}
+.sidebar .active {
+  border-radius: 5px;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: 0.5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.text-1{
+    font-weight: bolder;
+    margin:0;
+padding:0;
+line-height: 0%;
+}
+.text-2{
+  font-weight: bolder;
+    font-size: 18px;
+    margin:0;
+padding:0;
+line-height: 10px;
+}
+.websitetrf:hover{
+    color: blueviolet;
+}
+label{
+  font-weight: bolder;
+  margin: 30px;
+}
+.menu{
+  border-style: solid;
+  padding: 10px;
+}
+input{
+  padding: 10px;
+  margin: 20px;
+}
+i{
+color: rgb(20, 124, 176);
+}
+
+.logo-img{
+height: 60px;
+}
+
+
+form{
+  margin-left: 260px;
+  margin-top: 30px;
+  width: 50%;
+}
+
+table {
+  border-radius: 4px;
+  width: 10%;
+  padding:5px;
+}
+  
+thead {
+    background-color: hsl(0, 0%, 100%);
+    color: rgb(0, 0, 0);
+    padding: 5px;
+    font-size: 14px;
+    background-color: rgb(20, 124, 176);
+    color: white;
+}
+
+td {
+  text-align: center;
+  height:50%;
+  padding:3px;
+  
+}
+
+thead, td{
+  border-bottom: 5px solid rgb(0, 0, 0);
+}
+
+tr:hover {background-color: rgb(183, 183, 183);}
+
+button.btn{
+  display: inline-block;
+  border-radius: 4px;
+  background-color:  rgb(20, 124, 176);
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 10px;
+  padding: 7px;
+  margin: 5px;
+  height:30px;
+  width:75px;
+ 
+}
+
+.dpdwn{
+  width: 130px;
+}
+
+.in-out{
+  width:80px;
+  height: 10px;
+}
+
+.remark{
+width :100px;
+}
+
+div.page-heading{
+  margin-left: 260px;
+  margin-top: 85px;
+}
+
+div#timebtn{
+  margin-left: 260px;
+  margin-top: 50px;
+}

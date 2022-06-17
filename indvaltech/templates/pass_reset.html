@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Reset</title>
+</head>
+<body>
+    <form action="{% url 'reset' %}" method="post">
+        {% csrf_token %}
+        <div>
+            <div>
+                <h2>Enter your registered mail</h2>
+            </div>
+            <div>
+                <input type="text" name="email" placeholder="Email">
+                <br>
+                <br>
+            </div>
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

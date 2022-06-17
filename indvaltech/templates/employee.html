@@ -1,0 +1,192 @@
+{% extends 'index.html' %}
+
+{% block title %}
+    <title>Personal Details</title>
+{% endblock title %}
+
+{% block content %}
+    <section id="empdeets">
+        <form class="signup-form" method="post" action="{% url 'register' name %}" enctype="multipart/form-data" id="personal">
+            {% csrf_token %}
+            <div class="form-header">
+                <h1>Personal Details</h1>
+            </div>
+            <div class="form-body">
+                <div class="row">
+                    <div class="input-group">
+                        <label>Email </label>
+                        <input type="email" name="email" placholder="Enter your email address">
+                    </div>
+                    
+                </div>      
+                <div class="row">
+                    <div class="input-group">
+                        <label>Phone No.</label>
+                        <input type="text" name="ph" placholder="Phone Number">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                        <label>Emergency Phone No.</label>
+                        <input type="text" name="eph" placholder="Phone Number">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                        <label>Gender </label>
+    
+                        <div class="input-group">
+    
+                            <div>
+                                <select
+                                id="gender"
+                                name="gender"
+                                style="width: 210px; height: 40px"
+                              >
+                                <option disabled="disabled" selected="selected">
+                                    Choose option
+                                  </option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                        <option>Others</option>
+                               </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                        <label for="birthday">DOB</label>
+                        <input type="date" id="birthday" name="dob">
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                        <label>Blood Type </label>
+                        <input type="text" name="blood" placholder="Blood Type ">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                        <label>Current Address</label>
+                        <textarea type="text" name="sala" placholder="Current Address"> </textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                        <label>Permanent Address</label>
+                        <textarea type="text" name="paddress" placholder="Permanent Address"> </textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                        <label>Upload Profile Picture</label>
+                        <input type="file" name="img">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                        <label>Adhaar No.</label>
+                        <input type="number" name="aadhar">
+                    </div>
+                    <div class="input-group">
+                        <label>Upload Adhaar Card</label>
+                        <input type="file" id="aadhar" name="aDoc">
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="input-group">
+                        <label>Paasport</label>
+                        <input type="number" name="passport">
+                    </div>
+                    <div class="input-group">
+                        <label>Upload Passport</label>
+                        <input type="file" id="passport" name="passportDoc">
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="input-group">
+                        <label>PAN No.</label>
+                        <input type="number" name="Pan">
+                    </div>
+                    <div class="input-group">
+                        <label>Upload PAN Card</label>
+                        <input type="file" id="pan" name="panDoc">
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="input-group">
+                        <label>ESIC No.</label>
+                        <input type="number" name="esicNum">
+                    </div>
+                    <div class="input-group">
+                        <label>Upload ESIC</label>
+                        <input type="file" id="esic" name="esicDoc">
+                    </div>
+                </div>
+    
+            </div>
+            <div class="form-footer">
+                <div id="save"><button class="btn" id="save" type="Save">Save as Draft</button></div>
+                <a href="{%url 'bank' name %}">
+                    <div id="next"><button class="btn" type="Submit">Next</button></div>
+                </a>
+            </div>
+        </form>
+    </section>
+
+    <script>
+        const formId = "personal"; // ID of the form
+        const url = location.href; //  href for the page
+        const formIdentifier = `${url} ${formId}`; // Identifier used to identify the form
+        const saveButton = document.querySelector("#save"); // select save button
+        const alertBox = document.querySelector(".form-header"); // select alert display div
+        let form = document.querySelector(`#${formId}`); // select form
+        let formElements = form.elements; // get the elements in the form
+
+        const getFormData = () => {
+            let data = { [formIdentifier]: {} };
+            for (const element of formElements) {
+                if (element.name.length > 0) {
+                    data[formIdentifier][element.name] = element.value;
+                }
+            }
+            return data;
+        };
+
+        saveButton.onclick = event => {
+            event.preventDefault();
+            data = getFormData();
+            localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]));
+            const message = "Form draft has been saved!";
+            displayAlert(message);
+        };
+
+        const displayAlert = message => {
+            alertBox.innerText = message;
+            alertBox.style.display = "block";
+            setTimeout(function () {
+                alertBox.style.display = "none";
+            }, 1000);
+        };
+
+        const populateForm = () => {
+            if (localStorage.key(formIdentifier)) {
+                const savedData = JSON.parse(localStorage.getItem(formIdentifier)); // get and parse the saved data from localStorage
+                for (const element of formElements) {
+                    if (element.name in savedData) {
+                        element.value = savedData[element.name];
+                    }
+                }
+                const message = "Form has been refilled with saved data!";
+                displayAlert(message);
+            }
+        };
+
+        document.onload = populateForm(); // populate the form when the document is loaded
+    </script>
+{% endblock content %}
+    

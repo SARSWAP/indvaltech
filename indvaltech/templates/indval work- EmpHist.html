@@ -1,0 +1,72 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Personal Details</title>
+    <link rel="stylesheet" href="{%static dist/css/empdeets.css'%}">
+</head>
+
+<body>
+    <section id="empdeets">
+        <form class="signup-form">
+            <div class="form-header">
+                <h1>Employment History</h1>
+            </div>
+            <div class="form-body">
+                <div class="row"></div>
+                    <div class="input-group">
+                        <label>Organisation</label>
+                        <input type="text" name="org">
+                    </div>
+                <div class="row">
+                    <div class="input-group">
+                        <label>Designation</label>
+                        <input type="text" name="designation">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                        <label>Work</label>
+                        <input type="text" name="nature">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                        <label>Tools</label>
+                        <input type="text" name="software">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                        <label>Last Salary</label>
+                        <input type="text" name="lsalary">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                        <label for="">Reason of Leaving</label>
+                        <textarea  type="text" name="reason"> </textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="form-footer">
+                <div id="save"><button  class="btn">Save as Draft</button></div>
+                <div id="next"><button class="btn">Next</button></div>             
+                
+            </div>
+        </form>
+    </section>
+
+    <script>
+        const changeSliderValue = (value) => {
+            document.getElementById("rangeSliderLabel").innerText = value + " K";
+        }
+    </script>
+
+</body>
+
+</html>
