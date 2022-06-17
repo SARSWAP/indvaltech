@@ -1,0 +1,1 @@
+web: waitress-serve --listen=localhost:8000 hrms.wsgi:application
