@@ -1,18 +1,13 @@
-{%load static%}
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'index.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Personal Details</title>
-    <link rel="stylesheet" href="{%static dist/css/empdeets.css'%}">
-</head>
+{% block title %}
+    <title>Emplyoment History</title>
+{% endblock title %}
 
-<body>
+{% block content %}
     <section id="empdeets">
-        <form class="signup-form">
+        <form class="signup-form" method="post" action="{% url 'history' name %}" enctype="multipart/form-data" id="history">
+            {% csrf_token %}
             <div class="form-header">
                 <h1>Employment History</h1>
             </div>
@@ -52,9 +47,25 @@
                         <textarea  type="text" name="reason"> </textarea>
                     </div>
                 </div>
+                <button class="btn">Submit</button></div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Organisation</th>
+                            <th>Designation</th>
+                            <th>Work</th>
+                            <th>Last Salary</th>
+                            <th>Reason of leaving</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            
+                    </tbody>
+                </table>   
             </div>
             <div class="form-footer">
-                <div id="save"><button  class="btn">Save as Draft</button></div>
+                <div id="save"><button id="save" class="btn">Save as Draft</button></div>
                 <div id="next"><button class="btn">Next</button></div>             
                 
             </div>
@@ -62,11 +73,89 @@
     </section>
 
     <script>
-        const changeSliderValue = (value) => {
-            document.getElementById("rangeSliderLabel").innerText = value + " K";
+        const formEl = document.querySelector("form");
+        const tbodyEl = document.querySelector("tbody");
+        const tableEl = document.querySelector("table");
+        function onAddWebsite(e) {
+          e.preventDefault();
+          const orga = document.getElementById("org").value;
+          const desiga = document.getElementById("desig").value;
+          const worka = document.getElementById("work").value;
+          const lsalarya = document.getElementById("lsalary").value;
+          const rola = document.getElementById("rol").value;
+          tbodyEl.innerHTML += `
+              <tr>
+                  <td>${orga}</td>
+                  <td>${desiga}</td>
+                  <td>${worka}</td>
+                  <td>${lsalarya}</td>
+                  <td>${rola}</td>
+                  <td><button class="deleteBtn">Delete</button></td>
+              </tr>
+          `;
         }
+    
+        function onDeleteRow(e) {
+          if (!e.target.classList.contains("deleteBtn")) {
+            return;
+          }
+    
+          const btn = e.target;
+          btn.closest("tr").remove();
+        }
+    
+        formEl.addEventListener("submit", onAddWebsite);
+        tableEl.addEventListener("click", onDeleteRow);
+      </script>
+
+    <script>
+        const formId = "history"; // ID of the form
+        const url = location.href; //  href for the page
+        const formIdentifier = `${url} ${formId}`; // Identifier used to identify the form
+        const saveButton = document.querySelector("#save"); // select save button
+        const alertBox = document.querySelector(".form-header"); // select alert display div
+        let form = document.querySelector(`#${formId}`); // select form
+        let formElements = form.elements; // get the elements in the form
+
+        const getFormData = () => {
+            let data = { [formIdentifier]: {} };
+            for (const element of formElements) {
+                if (element.name.length > 0) {
+                    data[formIdentifier][element.name] = element.value;
+                }
+            }
+            return data;
+        };
+
+        saveButton.onclick = event => {
+            event.preventDefault();
+            data = getFormData();
+            localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]));
+            const message = "Form draft has been saved!";
+            displayAlert(message);
+        };
+
+        const displayAlert = message => {
+            alertBox.innerText = message;
+            alertBox.style.display = "block";
+            setTimeout(function () {
+                alertBox.style.display = "none";
+            }, 1000);
+        };
+
+        const populateForm = () => {
+            if (localStorage.key(formIdentifier)) {
+                const savedData = JSON.parse(localStorage.getItem(formIdentifier)); // get and parse the saved data from localStorage
+                for (const element of formElements) {
+                    if (element.name in savedData) {
+                        element.value = savedData[element.name];
+                    }
+                }
+                const message = "Form has been refilled with saved data!";
+                displayAlert(message);
+            }
+        };
+
+        document.onload = populateForm(); // populate the form when the document is loaded
     </script>
-
-</body>
-
-</html>
+{% endblock content %}

@@ -1,161 +1,106 @@
-{%load static%}
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'index.html' %}
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-    <title>Education</title>
+{% block title %}
+    <title>Qualification Details</title>
+{% endblock title %}
 
-    <!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
+{% block content %}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
-        rel="stylesheet" />
-
-    <!--google material icon-->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
-    <link rel="stylesheet" href="{%static 'dist/css/style.css'%}" />
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
-
-    <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
-        rel="stylesheet" />
-
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $(".add-row").click(function () {
-                var sl = $("#sl").val();
-                var qual = $("#qual").val();
-                var board = $("#board").val();
-                var percentage = $("#percentage").val();
-                var yop = $("#yop").val();
-                var markup = "<tr>b<td><input type='checkbox' name='record'></td> <td>" + sl + "</td> <td>" + qual + "</td> <td>" + board + "</td> <td>" + percentage + "</td> <td>" + yop + "</td>  </tr>";
-                $("table tbody").append(markup);
-            });
-
-            // Find and remove selected table rows
-            $(".delete-row").click(function () {
-                $("table tbody").find('input[name="record"]').each(function () {
-                    if ($(this).is(":checked")) {
-                        $(this).parents("tr").remove();
-                    }
-                });
-            });
-        });    
-    </script>
-    <style>
-        .eduIn {
-            margin: 20px 0;
-        }
-
-        .eduIn input,
-        button {
-            padding: 5px;
-        }
-
-        .eduTable {
-            width: 100%;
-            margin-bottom: 20px;
-            border-collapse: collapse;
-        }
-
-        .eduTable,
-        .eduTh,
-        .eduTd {
-            border: 1px solid #cdcdcd;
-        }
-
-        .eduTable .eudTh,
-        .eduTable .eduTd {
-            padding: 10px;
-            text-align: left;
-        }
-
-        .edu-in-field {
-            border: 1px solid black;
-            margin: 2px;
-        }
-        .eduContainer{
-            border: 1px solid black;
-            padding: 10px;
-            margin: 10px;
-            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-            margin-left: auto;
-    margin-right: auto;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container eduContainer">
-    
-            
-                    <h2 class="title text-center">Education Details</h2>
-                
-                <div class="card-body">
-                    <form method="POST" action="" class="eduIn">
-
-                        <input type="text" id="sl" placeholder="SL NO" class="edu-in-field">
-                        <input type="text" id="qual" placeholder="Qualification" class="edu-in-field">
-                        <input type="text" id="board" placeholder="board" class="edu-in-field">
-                        <input type="text" id="percentage" placeholder="percentage" class="edu-in-field">
-                        <input type="text" id="yop" placeholder="yop" class="edu-in-field">
-                        <input type="button" class="btn btn--radius-2 btn--red add-row edu-add-btn btn-primary"
-                            value="Add Row" class="edu-in-field">
-
-
-                        <br><br>
-
-
-
-                        <table class="eduTable">
-                            <thead>
-                                <tr class="eduTh">
-                                    <th>Select</th>
-                                    <th>SL NO</th>
-                                    <th>Qualification</th>
-                                    <th>Board</th>
-                                    <th>Percentage</th>
-                                    <th>Yaer Of Passing</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
-
-                        <button type="button" class="btn btn--radius-2 btn--red delete-row btn-primary">Delete
-                            Row</button>
-                        <button class="btn btn--radius-2 btn--red btn-primary" type="submit">
-                            Submit
-                        </button>
-                </div>
-                </form>
+<section id="empdeets">
+    <form class="signup-form" method="post" action="{% url 'education' name %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-header">
+            <h1>Education Details</h1>
         </div>
+        <div class="form-body">
+            <div class="row">
+                <div class="input-group">
+                    <label>SL NO</label>
+                    <input type="text" name="sl" id="sno">
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-group">
+                    <label>Qualification</label>
+                    <input type="text" name="qual" id="qual">
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-group">
+                    <label>Board</label>
+                    <input type="text" name="board" id="board">
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-group">
+                    <label>Percentage</label>
+                    <input type="text" name="percentage" id="%">
+                </div>
+            </div>  
+            <div class="row">
+                <div class="input-group">
+                    <label>Year Of Passing</label>
+                    <input type="text" name="yop" id="yop">
+                </div>
+            </div>
+            <button class="btn" type="Submit">Submit</button></div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>SL NO</th>
+                        <th>Qualification</th>
+                        <th>Board</th>
+                        <th>Percentage</th>
+                        <th>Year Of Passing</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                </tbody>
+            </table>
+            
+        <div class="form-footer">
+            <div id="save"><button  class="btn">Save as Draft</button></div>
+            <div id="next"><button class="btn" type="submit">Next</button></div>              
+        </div>
+    </form>
+</section>
 
+<script>
+const formEl = document.querySelector("form");
+const tbodyEl = document.querySelector("tbody");
+const tableEl = document.querySelector("table");
+function onAddWebsite(e) {
+  e.preventDefault();
+  const srno = document.getElementById("sno").value;
+  const quala = document.getElementById("qual").value;
+  const brd = document.getElementById("board").value;
+  const percent = document.getElementById("%").value;
+  const yrofpass = document.getElementById("yop").value;
+  tbodyEl.innerHTML += `
+      <tr>
+          <td>${srno}</td>
+          <td>${quala}</td>
+          <td>${brd}</td>
+          <td>${percent}</td>
+          <td>${yrofpass}</td>
+          <td><button class="deleteBtn">Delete</button></td>
+      </tr>
+  `;
+}
 
-    <!-- Jquery JS-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <!-- Vendor JS-->
-    <script src="vendor/select2/select2.min.js"></script>
-    <script src="vendor/datepicker/moment.min.js"></script>
-    <script src="vendor/datepicker/daterangepicker.js"></script>
+function onDeleteRow(e) {
+  if (!e.target.classList.contains("deleteBtn")) {
+    return;
+  }
 
-    <!-- Main JS-->
-    <script src="js/global.js"></script>
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-        crossorigin="anonymous"></script>
-</body>
+  const btn = e.target;
+  btn.closest("tr").remove();
+}
 
-</html>
+formEl.addEventListener("submit", onAddWebsite);
+tableEl.addEventListener("click", onDeleteRow);
+</script>
+
+{% endblock %}

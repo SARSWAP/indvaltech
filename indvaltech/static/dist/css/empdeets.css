@@ -144,3 +144,29 @@ textarea {
 input[type="file"]{
   padding-top: 2.5px;
 }
+
+
+table {
+  margin-top: 10px;
+  margin-left: 30px;
+  position: reative;
+ 
+  text-align: center;
+  font-family: Arial;
+  font-size: 16px;
+  font-weight: 10;
+  width: 90%;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgb(0, 0, 0);
+}
+table td{
+  padding: 8px;
+  border: 1px solid rgb(221, 221, 221);
+  
+}
+table th {
+  color: white;
+  border: 1px solid #ddd;
+  background-color: rgb(20, 124, 176);
+  
+}

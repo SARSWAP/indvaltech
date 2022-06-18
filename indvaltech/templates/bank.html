@@ -7,7 +7,7 @@
 {% block content %}
 
     <section id="empdeets">
-        <form class="signup-form" id="bank">
+        <form class="signup-form" method="post" action="{% url 'bank' name %}" enctype="multipart/form-data"id="bank">
             {% csrf_token %}
             <div class="form-header">
                 <h1>Bank Details</h1>

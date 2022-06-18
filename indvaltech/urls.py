@@ -23,5 +23,4 @@ urlpatterns = [
      path('payslip', views.payslip, name="payslip"),
      path('hrd', views.hrd, name="hrd"),
      path('reset/', ResetPasswordView.as_view(), name="reset"),
-      path('education', views.education, name="education"),
 ]
