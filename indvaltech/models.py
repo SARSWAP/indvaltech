@@ -44,7 +44,7 @@ class Employee(models.Model):
    passport=models.IntegerField()
    passportDoc=models.FileField(upload_to='media/')
    esicNum=models.IntegerField()
-   esicDoc=models.ImageField(upload_to='media/')
+   esicDoc=models.FileField(upload_to='media/')
    Address = models.CharField(max_length=100)
    PermanentAddress= models.CharField(max_length=100)
    Ph = models.IntegerField()
@@ -55,7 +55,7 @@ class Employee(models.Model):
    EmergencyPh= models.IntegerField()
    Photo=models.ImageField(upload_to='media/')
 
-   def save(self, *args, **kwargs):
+   '''def save(self, *args, **kwargs):
         if not self.id:
             self.Photo = self.compressImage(self.Photo)
         super(Employee, self).save(*args, **kwargs)
@@ -67,14 +67,12 @@ class Employee(models.Model):
         imageTemproary.save(outputIoStream , format='JPEG', quality=60)
         outputIoStream.seek(0)
         Photo = InMemoryUploadedFile(outputIoStream,'ImageField', "%s.jpg" % Photo.name.split('.')[0], 'image/jpeg', sys.getsizeof(outputIoStream), None)
-        return Photo
-
-
+        return Photo'''
    class Meta:
       db_table = "Employee"
    
    def __str__(self):
-      return self.Name
+      return self.Name.Name
 
 
 #Family Details Table
