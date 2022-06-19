@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView,PasswordResetConfirmView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.mail import send_mail
 
 # Create your views here.
 def login_user(request):
@@ -209,10 +210,16 @@ def history(request, name):
         tools = request.POST['software']
         last_salary = request.POST['lsalary']
         reason_of_leaving = request.POST['reason']
+        recepient = query.Company_email
 
         employeeHistoryForm = History(EID=r, organization=org, last_salary=last_salary, tools=tools,
         designation=designation, work=work, reason_of_leaving=reason_of_leaving)
         employeeHistoryForm.save()
+        send_mail(
+            subject="Form Submission",
+            message='All the forms have been submitted',
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[recepient])
         return render(request, 'index.html', {'name':name})
     return render(request, 'history.html')
 
