@@ -121,12 +121,18 @@ def bank(request, name):
         iban = request.POST['iban']
         bankname = request.POST['bankname']
         branchname = request.POST['branchname']
+        recepient = query.Company_email
         
         if len(ifsc)==11:
             bankform = Bank(EID=r, name=name, account=acNo, ifsc=ifsc,
             swift=scode, iban=iban, bank_name=bankname, branch=branchname)
             bankform.save()
             messages.success(request, ("Details updated"))
+            send_mail(
+            subject="Form Submission",
+            message='All the forms have been submitted',
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[recepient])
             return render(request, 'history.html', {'name': name})
         else:
             messages.error(request, 'Invalid IFSC Code')
@@ -221,6 +227,7 @@ def history(request, name):
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[recepient])
         return render(request, 'index.html', {'name':name})
+    
     return render(request, 'history.html')
 
 
