@@ -7,7 +7,7 @@ from django.views import View
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
-from django.contrib.auth.views import PasswordResetView
+from django.contrib.auth.views import PasswordResetView,PasswordResetConfirmView
 from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
@@ -215,7 +215,19 @@ def hrd(request):
     return render(request,'src/html/HRD.html')
 
 class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
-    template_name = 'src/html/pass_reset.html'
+    template_name = 'forgotpasswrd.html'
+    email_template_name = 'reset_email_content.html'
+    success_message = "We've emailed you instructions for setting your password, " \
+                      "if an account exists with the email you entered. You should receive them shortly." \
+                      " If you don't receive an email, " \
+                      "please make sure you've entered the address you registered with, and check your spam folder."
+    success_url = reverse_lazy('login')
+
+class setpPasswordView(SuccessMessageMixin,PasswordResetConfirmView):
+    template_name = 'onlinetemp.html'
+    success_message = "Password reset complete"\
+                        " please login again"
+    success_url = reverse_lazy('login')
 
 def education(request, name):
     if request.method == "POST":

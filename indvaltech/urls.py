@@ -23,4 +23,5 @@ urlpatterns = [
      path('payslip', views.payslip, name="payslip"),
      path('hrd', views.hrd, name="hrd"),
      path('reset/', ResetPasswordView.as_view(), name="reset"),
+     path('set_password/<uidb64>/<token>/',setpPasswordView.as_view(),name='set_password'),
 ]
