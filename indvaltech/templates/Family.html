@@ -6,56 +6,110 @@
 
 {% block content %}
 
-
-
-    <!-- Form-->
-    <section id="Family">
-    <div class="form">
-        <div class="form-toggle"></div>
-        <div class="form-panel one">
-            <div class="form-header">
-                <h1>Family Details</h1>
-            </div>
-            <div class="form-content">
-                <form>
-                    <div class="form-group">
-                        <label for="username">Name of the Family Member</label>
-                        <input type="text" id="username" name="username" required="required" />
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Age</label>
-                        <input type="text" id="password" name="password" required="required" />
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Relation</label>
-                        <input type="text" id="password" name="password" required="required" />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Occupation</label>
-                        <input type="text" id="password" name="password" required="required" />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Conatct</label>
-                        <input type="text" id="password" name="password" required="required" />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Remarks</label>
-                        <input type="text" id="password" name="password" required="required" />
-                    </div>
-                   
-                   
-                </form>
-                <div class="form-group">
-                    <button type="submit" id="savedraftbtn">Save as Draft</button>
-                    <button type="submit" id="addmembtn">Add Member</button>
-                    <button type="submit" id="nextbtn">Next</button>
+<section id="empdeets">
+    <form class="signup-form" method="post" action="{% url 'family' name %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-header">
+            <h1>Family Details</h1>
+        </div>
+        <div class="form-body">
+            <div class="row">
+                <div class="input-group">
+                    <label>Name</label>
+                    <input type="text" name="fmember_name" id="name">
                 </div>
             </div>
+            <div class="row">
+                <div class="input-group">
+                    <label>Age</label>
+                    <input type="text" name="age" id="age">
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-group">
+                    <label>Relation</label>
+                    <input type="text" name="relatives" id="rel">
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-group">
+                    <label>Occupation</label>
+                    <input type="text" name="occupation" id="occ">
+                </div>
+            </div>  
+            <div class="row">
+                <div class="input-group">
+                    <label>Contact</label>
+                    <input type="text" name="contact" id="con">
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-group">
+                    <label>Remark</label>
+                    <input type="text" name="remarks" id="rem">
+                </div>
+            </div>
+            <button class="btn" type="submit">Add</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Relation</th>
+                        <th>Occupation</th>
+                        <th>Contact</th>
+                        <th>Remark</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                </tbody>
+            </table>
         </div>
-       
-    </div>
+        <div class="form-footer">
+            <div id="save"><button  class="btn"  type=" button">Save as Draft</button></div>
+            <div id="next"><a href="{% url 'bank' name %}"><button class="btn" type="button">Next</button></a></div>               
+        </div>
+    </form>
 </section>
-{% endblock content %}
+
+<script>
+const formEl = document.querySelector("form");
+const tbodyEl = document.querySelector("tbody");
+const tableEl = document.querySelector("table");
+function onAddWebsite(e) {
+  e.preventDefault();
+  const naam = document.getElementById("name").value;
+  const umar = document.getElementById("age").value;
+  const rishta = document.getElementById("rel").value;
+  const kaam = document.getElementById("occ").value;
+  const number = document.getElementById("con").value;
+  const rema = document.getElementById("rem").value;
+  tbodyEl.innerHTML += `
+      <tr>
+          <td>${naam}</td>
+          <td>${umar}</td>
+          <td>${rishta}</td>
+          <td>${kaam}</td>
+          <td>${number}</td>
+          <td>${rema}</td>
+          <td><button class="deleteBtn">Delete</button></td>
+      </tr>
+  `;
+}
+
+function onDeleteRow(e) {
+  if (!e.target.classList.contains("deleteBtn")) {
+    return;
+  }
+
+  const btn = e.target;
+  btn.closest("tr").remove();
+}
+
+formEl.addEventListener("submit", onAddWebsite);
+tableEl.addEventListener("click", onDeleteRow);
+</script>
+
+{% endblock %}

@@ -1,3 +1,4 @@
+from re import template
 from django.conf import settings
 from django.shortcuts import render,redirect
 from django.contrib import messages
@@ -46,7 +47,7 @@ def family(request,name):
                 occupation=occupation, contact=contact, remarks=remarks)
                 form1.save()
                 messages.success(request, ("Details updated"))
-                return render(request, 'indval work-bankDetails.html', {'name': name})
+                return render(request, 'Family.html', {'name': name})
         else:
                 messages.error(request, 'Invalid Phone Number')
     return render(request, 'Family.html',{'name':name})
@@ -125,14 +126,14 @@ def bank(request, name):
             swift=scode, iban=iban, bank_name=bankname, branch=branchname)
             bankform.save()
             messages.success(request, ("Details updated"))
-            return render(request, 'indval work- EmpHist.html', {'name': name})
+            return render(request, 'history.html', {'name': name})
         else:
             messages.error(request, 'Invalid IFSC Code')
     return render(request, 'bank.html', {'name': name})
 
 
-def dashboard(request):
-    return render(request,'src/html/index.html')
+def dashboard(request, name):
+    return render(request,'index.html', {'name': name})
 
 
 class AddProject(View):
@@ -163,6 +164,20 @@ def AttendForm(request):
 
 def DesignDashboard(request):
     return render(request,'src/html/Design Dashboard.html')
+
+def education(request, name):
+    if request.method == "POST":
+        query = HRD_table.objects.filter(Q(Name=name))
+        r = query[0]
+        q = request.POST['qual']
+        b = request.POST['board']
+        p = request.POST['percent']
+        y = request.POST['yop']
+    
+        educationform = Education(EID=r, qualification=q, board=b, percentage=p, passing=y)
+        educationform.save()
+        return render(request, 'src/html/bank.html', {'name':name})
+    return render(request,'src/html/Education.html')
 
 class AddActivity(View):
     def get(self, request, *args, **kwargs):
@@ -198,8 +213,8 @@ def history(request, name):
         employeeHistoryForm = History(EID=r, organization=org, last_salary=last_salary, tools=tools,
         designation=designation, work=work, reason_of_leaving=reason_of_leaving)
         employeeHistoryForm.save()
-        return render(request, 'src/html/index.html', {'name':name})
-    return render(request, 'src/html/indval work- EmpHist.html')
+        return render(request, 'index.html', {'name':name})
+    return render(request, 'history.html')
 
 
 def timesheet(request):
@@ -228,6 +243,8 @@ class setpPasswordView(SuccessMessageMixin,PasswordResetConfirmView):
     success_message = "Password reset complete"\
                         " please login again"
     success_url = reverse_lazy('login')
+
+
 
 def education(request, name):
     if request.method == "POST":

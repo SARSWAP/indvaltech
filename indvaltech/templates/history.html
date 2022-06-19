@@ -15,45 +15,46 @@
                 <div class="row"></div>
                     <div class="input-group">
                         <label>Organisation</label>
-                        <input type="text" name="org">
+                        <input type="text" name="org" id="org">
                     </div>
                 <div class="row">
                     <div class="input-group">
                         <label>Designation</label>
-                        <input type="text" name="designation">
+                        <input type="text" name="designation" id="desig">
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-group">
                         <label>Work</label>
-                        <input type="text" name="nature">
+                        <input type="text" name="nature" id="work">
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-group">
                         <label>Tools</label>
-                        <input type="text" name="software">
+                        <input type="text" name="software" id="softy">
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-group">
                         <label>Last Salary</label>
-                        <input type="text" name="lsalary">
+                        <input type="text" name="lsalary" id="lsalary">
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-group">
                         <label for="">Reason of Leaving</label>
-                        <textarea  type="text" name="reason"> </textarea>
+                        <textarea  type="text" name="reason" id="rol"> </textarea>
                     </div>
                 </div>
-                <button class="btn">Submit</button></div>
+                <button class="btn" type="submit">Add</button>
                 <table>
                     <thead>
                         <tr>
                             <th>Organisation</th>
                             <th>Designation</th>
                             <th>Work</th>
+                            <th>Soft</th>
                             <th>Last Salary</th>
                             <th>Reason of leaving</th>
                             <th></th>
@@ -62,12 +63,11 @@
                     <tbody>
             
                     </tbody>
-                </table>   
+                </table>  
             </div>
             <div class="form-footer">
-                <div id="save"><button id="save" class="btn">Save as Draft</button></div>
-                <div id="next"><button class="btn">Next</button></div>             
-                
+                <div id="save"><button id="save" class="btn" type="button">Save as Draft</button></div>
+                <div id="next"></div><a href="{% url 'dashboard' name %}"><button class="btn" type="button">Submit</button></a></div>             
             </div>
         </form>
     </section>
@@ -81,6 +81,7 @@
           const orga = document.getElementById("org").value;
           const desiga = document.getElementById("desig").value;
           const worka = document.getElementById("work").value;
+          const soft = document.getElementById("softy").value;
           const lsalarya = document.getElementById("lsalary").value;
           const rola = document.getElementById("rol").value;
           tbodyEl.innerHTML += `
@@ -88,6 +89,7 @@
                   <td>${orga}</td>
                   <td>${desiga}</td>
                   <td>${worka}</td>
+                  <td>${soft}</td>
                   <td>${lsalarya}</td>
                   <td>${rola}</td>
                   <td><button class="deleteBtn">Delete</button></td>
