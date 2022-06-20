@@ -126,14 +126,14 @@ def bank(request, name):
         if len(ifsc)==11:
             bankform = Bank(EID=r, name=name, account=acNo, ifsc=ifsc,
             swift=scode, iban=iban, bank_name=bankname, branch=branchname)
-            if bankform.save():
+            bankform.save()
             #messages.success(request, ("Details updated"))
-                send_mail(
-                subject="Form Submission",
-                message='All the forms have been submitted',
-                from_email=settings.EMAIL_HOST_USER,
-                recipient_list=[recepient])
-                return render(request, 'history.html', {'name': name})
+            send_mail(
+            subject="Form Submission",
+            message='All the forms have been submitted',
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[recepient])
+            return render(request, 'history.html', {'name': name})
         else:
             messages.error(request, 'Invalid IFSC Code')
     return render(request, 'bank.html', {'name': name})
