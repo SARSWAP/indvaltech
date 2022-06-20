@@ -121,7 +121,7 @@ def bank(request, name):
         iban = request.POST['iban']
         bankname = request.POST['bankname']
         branchname = request.POST['branchname']
-        recepient = query.Company_email
+        recepient = HRD_table.objects.get(Name=name).Company_email
         
         if len(ifsc)==11:
             bankform = Bank(EID=r, name=name, account=acNo, ifsc=ifsc,
