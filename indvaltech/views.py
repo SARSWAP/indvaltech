@@ -294,16 +294,5 @@ def icons(request):
     photo1 = plotly.io.to_html(fig2,config= {'displayModeBar': False})
     print("plotting done")
     ppplot = plotly.offline.plot(fig2, include_plotlyjs=False, output_type='div')
-    return render(request, 'icons.html', {"photo":photo})
-
-
-
-
-
-
-
-
-
-
-
-
+    context = {'name': name,"photo":photo,"photo1":photo1,"ppplot":ppplot,"l1":l1,"fig":fig,"fig2":fig2}
+    return render(request, 'icons.html', context)
