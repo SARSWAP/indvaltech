@@ -40,7 +40,11 @@
 {% endif %}
     </div>
     <div>
+      {% if ppplot %}
       {{ ppplot|safe }}
+{% else %}
+<p>No graph was provided.</p>
+{% endif %}
     </div>
   </div>
 {% endblock %}
