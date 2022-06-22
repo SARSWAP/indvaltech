@@ -291,5 +291,6 @@ def icons(request, name):
     fig =px.bar(x=d1,y=d2)
     photo = plotly.io.to_html(fig,config= {'displayModeBar': False})
     fig2 = px.line(x=d1, y=d2)
-    photo1 = plotly.io.to_html(fig,config= {'displayModeBar': False})
+    photo1 = plotly.io.to_html(fig2,config= {'displayModeBar': False})
+    print("plotting done")
     return render(request, 'icons.html', {'name': name,"photo":photo,"photo1":photo1})
