@@ -240,3 +240,7 @@ class Attendance(models.Model):
 
    def __str__(self):
       return self.EID.Name
+
+class testtable(models.Model):
+   d1= models.IntegerField(primary_key=True)
+   d2= models.IntegerField()
