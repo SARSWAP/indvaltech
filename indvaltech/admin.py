@@ -90,6 +90,7 @@ admin.site.register(Family, FamilyAdmin)
 admin.site.register(Bank, BankAdmin)
 admin.site.register(History, HistoryAdmin)
 admin.site.register(HRD_table, HRDAdmin)
+admin.site.register(testtable)
 
 
 #Removing Group
