@@ -281,7 +281,7 @@ def education(request, name):
 def search(request):
     return render(request,'search.html')
 
-def icons(request, name):
+def icons(request):
     l1 = testtable.objects.values()
     d1 = []
     d2 = []
@@ -294,4 +294,16 @@ def icons(request, name):
     photo1 = plotly.io.to_html(fig2,config= {'displayModeBar': False})
     print("plotting done")
     ppplot = plotly.offline.plot(fig2, include_plotlyjs=False, output_type='div')
-    return render(request, 'icons.html', {'name': name,"photo":photo,"photo1":photo1,"ppplot":ppplot})
+    return render(request, 'icons.html', {'name': name,"photo":photo,"photo1":photo1,"ppplot":ppplot,"l1":l1,"fig":fig,"fig2":fig2})
+
+
+
+
+
+
+
+
+
+
+
+
