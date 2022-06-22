@@ -11,6 +11,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView,PasswordResetConfirmView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import send_mail
+from Dashboard_plots_methods import *
 
 # Create your views here.
 def login_user(request):
@@ -278,3 +279,8 @@ def education(request, name):
 
 def search(request):
     return render(request,'search.html')
+
+def icons(request, name):
+    photo = plotdatadash()
+    photo1 = plotdatadash2()
+    return render(request, 'icons.html', {'name': name,"photo":photo,"photo1":photo1})
