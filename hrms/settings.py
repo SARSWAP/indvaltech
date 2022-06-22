@@ -13,7 +13,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['indval2022.herokuapp.com','localhost']
+ALLOWED_HOSTS = ['indval.herokuapp.com','localhost']
 
 
 # Application definition
@@ -118,7 +118,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://indval2022.herokuapp.com'
+    'https://indval.herokuapp.com'
 ]
 
 
