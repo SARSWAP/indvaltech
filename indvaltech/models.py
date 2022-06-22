@@ -126,34 +126,8 @@ class Bank(models.Model):
       db_table = "Bank"
 
    def __str__(self):
-<<<<<<< HEAD
-      return self.name
-
-
-#Document Table
-class Document(models.Model):
-   EID = models.ForeignKey(HRD_table, on_delete=models.CASCADE)
-   application = models.FileField(upload_to='media/')
-   pan = models.FileField(upload_to='media/')
-   aadhar = models.FileField(upload_to='media/')
-   passport = models.FileField(upload_to='media/')
-   noc = models.FileField(upload_to='media/')
-   payslip = models.FileField(upload_to='media/')
-   esic = models.FileField(upload_to='media/')
-   experience = models.FileField(upload_to='media/')
-   it_form = models.FileField(upload_to='media/')
-
-   class Meta:
-      db_table = "Document"
-
-   def __str__(self):
-      return self.EID.Name
-
-
-=======
       return self.name  
    
->>>>>>> 4af224604f7d6ea9de58b035e5c437d8769475f5
 #Certification Table
 class Certification(models.Model):
    EID = models.ForeignKey(HRD_table, on_delete=models.CASCADE)
