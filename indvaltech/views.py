@@ -28,7 +28,7 @@ def login_user(request):
             if(des == "CEO" or des == "HR"):
                 return render(request,'HR Dashboard.html')
             elif('manager' in des or 'Manager' in des):
-                return render(request,'index.html', {'name':name})
+                return render(request,'icons.html', {'name':name})
             else:
                 return render(request,'Design Dashboard.html')
         else:
