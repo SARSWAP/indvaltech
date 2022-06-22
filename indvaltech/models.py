@@ -27,7 +27,7 @@ class HRD_table(models.Model):
 
    class Meta:
       db_table = "HR_table"
-   
+
    def __str__(self):
 	   return self.Name
 
@@ -44,33 +44,36 @@ class Employee(models.Model):
    passport=models.IntegerField()
    passportDoc=models.FileField(upload_to='media/')
    esicNum=models.IntegerField()
-   esicDoc=models.FileField(upload_to='media/')
+   esicDoc=models.ImageField(upload_to='media/')
    Address = models.CharField(max_length=100)
    PermanentAddress= models.CharField(max_length=100)
    Ph = models.IntegerField()
    Gender = models.CharField(max_length=10)
    DOB= models.DateField()
-   Email = models.CharField(max_length=30)
+   #Email = models.CharField(max_length=30)
    Blood= models.CharField(max_length=10)
    EmergencyPh= models.IntegerField()
    Photo=models.ImageField(upload_to='media/')
 
-   '''def save(self, *args, **kwargs):
+   def save(self, *args, **kwargs):
         if not self.id:
             self.Photo = self.compressImage(self.Photo)
         super(Employee, self).save(*args, **kwargs)
 
    def compressImage(self,Photo):
-        imageTemproary = Image.open(Photo)
+        imageTemproary1 = Image.open(Photo)
+        imageTemproary = imageTemproary1.convert('RGB')
         outputIoStream = BytesIO()
-        imageTemproaryResized = imageTemproary.resize( (1020,573) ) 
+        imageTemproaryResized = imageTemproary.resize( (1020,573) )
         imageTemproary.save(outputIoStream , format='JPEG', quality=60)
         outputIoStream.seek(0)
         Photo = InMemoryUploadedFile(outputIoStream,'ImageField', "%s.jpg" % Photo.name.split('.')[0], 'image/jpeg', sys.getsizeof(outputIoStream), None)
-        return Photo'''
+        return Photo
+
+
    class Meta:
       db_table = "Employee"
-   
+
    def __str__(self):
       return self.Name.Name
 
@@ -101,11 +104,11 @@ class Education(models.Model):
 
    class Meta:
       db_table = "Education"
-   
+
    def __str__(self):
       return self.EID.Name
-   
-   
+
+
 #Bank Table
 class Bank(models.Model):
    alphanumeric = RegexValidator(
@@ -121,30 +124,9 @@ class Bank(models.Model):
 
    class Meta:
       db_table = "Bank"
-   
-   def __str__(self):
-      return self.name
-
-
-#Document Table
-class Document(models.Model):
-   EID = models.ForeignKey(HRD_table, on_delete=models.CASCADE)
-   application = models.FileField(upload_to='media/')
-   pan = models.FileField(upload_to='media/')
-   aadhar = models.FileField(upload_to='media/')
-   passport = models.FileField(upload_to='media/')
-   noc = models.FileField(upload_to='media/')
-   payslip = models.FileField(upload_to='media/')
-   esic = models.FileField(upload_to='media/')
-   experience = models.FileField(upload_to='media/')
-   it_form = models.FileField(upload_to='media/')
-
-   class Meta:
-      db_table = "Document"
 
    def __str__(self):
-      return self.EID.Name
-  
+      return self.name  
    
 #Certification Table
 class Certification(models.Model):
@@ -157,11 +139,11 @@ class Certification(models.Model):
 
    class Meta:
       db_table = "Certification"
-   
+
    def __str__(self):
       return self.EID.Name
- 
-   
+
+
 #Employment History Table
 class History(models.Model):
    EID = models.ForeignKey(HRD_table,on_delete=models.CASCADE)
@@ -171,14 +153,14 @@ class History(models.Model):
    tools = models.CharField(max_length=50)
    last_salary = models.CharField(max_length=20)
    reason_of_leaving = models.CharField(max_length=100)
-   
+
    class Meta:
          db_table = 'History'
-   
+
    def __str__(self):
       return self.EID.Name
-  
-   
+
+
 #Projects table
 class Project(models.Model):
    PID = models.IntegerField()
