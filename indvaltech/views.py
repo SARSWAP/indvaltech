@@ -11,7 +11,8 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView,PasswordResetConfirmView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import send_mail
-from Dashboard_plots_methods import *
+import plotly
+import plotly.express as px
 
 # Create your views here.
 def login_user(request):
@@ -281,6 +282,14 @@ def search(request):
     return render(request,'search.html')
 
 def icons(request, name):
-    photo = plotdatadash()
-    photo1 = plotdatadash2()
+    l1 = testtable.objects.values()
+    d1 = []
+    d2 = []
+    for i in l1:
+        d1.append(i["d1"])
+        d2.append(i["d2"])
+    fig =px.bar(x=d1,y=d2)
+    photo = plotly.io.to_html(fig,config= {'displayModeBar': False})
+    fig2 = px.line(x=d1, y=d2)
+    photo1 = plotly.io.to_html(fig,config= {'displayModeBar': False})
     return render(request, 'icons.html', {'name': name,"photo":photo,"photo1":photo1})
