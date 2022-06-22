@@ -121,13 +121,13 @@ def bank(request, name):
         iban = request.POST['iban']
         bankname = request.POST['bankname']
         branchname = request.POST['branchname']
-        recepient = query.Company_email
+        recepient = HRD_table.objects.get(Name=name).Company_email
         
         if len(ifsc)==11:
             bankform = Bank(EID=r, name=name, account=acNo, ifsc=ifsc,
             swift=scode, iban=iban, bank_name=bankname, branch=branchname)
             bankform.save()
-            messages.success(request, ("Details updated"))
+            #messages.success(request, ("Details updated"))
             send_mail(
             subject="Form Submission",
             message='All the forms have been submitted',
