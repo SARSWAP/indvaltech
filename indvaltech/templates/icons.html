@@ -24,12 +24,20 @@
       </div>
     </div>
     <div>
-      Plot1
+      
+      {% if photo %}
       {{ photo|safe }}
+{% else %}
+<p>No graph was provided.</p>
+{% endif %}
+
     </div>
     <div>
-      Plot2
+     {% if photo1 %}
       {{ photo1|safe }}
+{% else %}
+<p>No graph was provided.</p>
+{% endif %}
     </div>
   </div>
 {% endblock %}
